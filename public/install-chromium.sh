@@ -214,11 +214,11 @@ install_python_deps() {
     log_info "Using Python: $python_cmd (version: $version)"
     
     # Upgrade pip
-    $python_cmd -m pip install --upgrade pip --user --no-warn-script-location
+    $python_cmd -m pip install --upgrade pip --user --no-warn-script-location --quiet
     
     # Install required packages
     log_info "Installing browser-use and dependencies..."
-    $python_cmd -m pip install --user --no-warn-script-location \
+    $python_cmd -m pip install --user --no-warn-script-location --quiet \
         "playwright>=1.40.0" \
         "browser-use>=0.2.4" \
         "fastapi>=0.115.0" \
