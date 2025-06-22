@@ -25,19 +25,19 @@ NC='\033[0m' # No Color
 
 # Logging functions
 log_info() {
-    echo -e "${BLUE}ℹ️  $1${NC}"
+    printf "${BLUE}ℹ️  %s${NC}\n" "$1"
 }
 
 log_success() {
-    echo -e "${GREEN}✅ $1${NC}"
+    printf "${GREEN}✅ %s${NC}\n" "$1"
 }
 
 log_warning() {
-    echo -e "${YELLOW}⚠️  $1${NC}"
+    printf "${YELLOW}⚠️  %s${NC}\n" "$1"
 }
 
 log_error() {
-    echo -e "${RED}❌ $1${NC}"
+    printf "${RED}❌ %s${NC}\n" "$1"
 }
 
 # Check if command exists
@@ -219,14 +219,14 @@ install_python_deps() {
     # Install required packages
     log_info "Installing browser-use and dependencies..."
     $python_cmd -m pip install --user --no-warn-script-location \
-        playwright>=1.40.0 \
-        browser-use>=0.2.4 \
-        fastapi>=0.115.0 \
-        uvicorn[standard]>=0.34.0 \
-        aiofiles>=24.1.0 \
-        aiohttp>=3.12.0 \
-        typer>=0.15.0 \
-        python-dotenv>=1.0.0
+        "playwright>=1.40.0" \
+        "browser-use>=0.2.4" \
+        "fastapi>=0.115.0" \
+        "uvicorn[standard]>=0.34.0" \
+        "aiofiles>=24.1.0" \
+        "aiohttp>=3.12.0" \
+        "typer>=0.15.0" \
+        "python-dotenv>=1.0.0"
     
     if [ $? -eq 0 ]; then
         log_success "Python dependencies installed"
@@ -622,12 +622,12 @@ EOF
 main() {
     echo ""
     echo ""
-    echo -e "\033[95m██████╗ ███████╗██████╗ ██████╗  ██████╗ ██╗    ██╗███████╗███████╗\033[0m"
-    echo -e "\033[95m██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔═══██╗██║    ██║██╔════╝██╔════╝\033[0m"
-    echo -e "\033[95m██████╔╝█████╗  ██████╔╝██████╔╝██║   ██║██║ █╗ ██║███████╗█████╗  \033[0m"
-    echo -e "\033[95m██╔══██╗██╔══╝  ██╔══██╗██╔══██╗██║   ██║██║███╗██║╚════██║██╔══╝  \033[0m"
-    echo -e "\033[95m██║  ██║███████╗██████╔╝██║  ██║╚██████╔╝╚███╔███╔╝███████║███████╗\033[0m"
-    echo -e "\033[95m╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ ╚══════╝╚══════╝\033[0m"
+    printf "\033[95m██████╗ ███████╗██████╗ ██████╗  ██████╗ ██╗    ██╗███████╗███████╗\033[0m\n"
+    printf "\033[95m██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔═══██╗██║    ██║██╔════╝██╔════╝\033[0m\n"
+    printf "\033[95m██████╔╝█████╗  ██████╔╝██████╔╝██║   ██║██║ █╗ ██║███████╗█████╗  \033[0m\n"
+    printf "\033[95m██╔══██╗██╔══╝  ██╔══██╗██╔══██╗██║   ██║██║███╗██║╚════██║██╔══╝  \033[0m\n"
+    printf "\033[95m██║  ██║███████╗██████╔╝██║  ██║╚██████╔╝╚███╔███╔╝███████║███████╗\033[0m\n"
+    printf "\033[95m╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ ╚══════╝╚══════╝\033[0m\n"
     echo ""
     echo ""
     echo "🚀 Chromium Setup"

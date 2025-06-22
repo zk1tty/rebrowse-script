@@ -6,11 +6,17 @@ You want to host your `install-chromium.sh` script on your custom domain so user
 curl -LsSf https://script.rebrowse.me/install.sh | sh
 ```
 
+- Location
+  We have Chromium installed via Homebrew at /opt/homebrew/bin/chromium
+
+
 ### local test
 
 ```bash
 sh public/install-chromium.sh
 ``` 
+
+
 
 ### expacted result
 
