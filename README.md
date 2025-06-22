@@ -3,211 +3,117 @@
 ## Overview
 You want to host your `install-chromium.sh` script on your custom domain so users can install your tool with:
 ```bash
-curl -LsSf https://yourdomain.com/install.sh | sh
+curl -LsSf https://script.rebrowse.me/install.sh | sh
 ```
 
-## Solution 1: Vercel (Recommended for your setup)
+### local test
 
-### ✅ Pros:
-- You're already using Vercel for your UI
-- Easy to set up
-- Free tier available
-- CDN distribution
-- Custom domain support
-- Automatic HTTPS
-
-### ⚠️ Considerations:
-- Static files only (no server-side processing)
-- 100MB file size limit (your script is only 27KB, so no issue)
-
-### Implementation:
-
-#### Option A: Separate Vercel Project for Scripts
-Create a new directory structure for your scripts:
-
-```
-scripts-hosting/
-├── public/
-│   ├── install.sh          # Your install-chromium.sh renamed
-│   └── install-chromium.sh # Original name as alias
-├── vercel.json
-└── package.json
-```
-
-**vercel.json:**
-```json
-{
-  "headers": [
-    {
-      "source": "/(.*\\.sh)",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/plain; charset=utf-8"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400"
-        }
-      ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/install",
-      "destination": "/install.sh",
-      "permanent": false
-    }
-  ]
-}
-```
-
-## Solution 2: GitHub Pages + Custom Domain
-
-### ✅ Pros:
-- Free
-- Direct integration with your GitHub repo
-- Automatic updates when you push changes
-- Custom domain support
-
-### Implementation:
-1. Create a `gh-pages` branch
-2. Add your scripts to the root or a `scripts/` directory
-3. Enable GitHub Pages in repository settings
-4. Configure custom domain
-
-## Solution 3: Netlify
-
-### ✅ Pros:
-- Excellent for static sites
-- Great free tier
-- Easy deployment from Git
-- Custom headers and redirects
-
-### Implementation:
-Create `netlify.toml`:
-```toml
-[[headers]]
-  for = "/*.sh"
-  [headers.values]
-    Content-Type = "text/plain; charset=utf-8"
-    Cache-Control = "public, max-age=86400"
-
-[[redirects]]
-  from = "/install"
-  to = "/install.sh"
-  status = 302
-```
-
-## Solution 4: AWS S3 + CloudFront
-
-### ✅ Pros:
-- Highly scalable
-- Very reliable
-- CDN distribution
-- Cost-effective for high traffic
-
-### ⚠️ Cons:
-- More complex setup
-- Requires AWS knowledge
-
-## Solution 5: GitHub Raw + Custom Domain (Not Recommended)
-
-While you could use GitHub's raw file serving with a CNAME redirect, this:
-- Violates GitHub's Terms of Service for high traffic
-- No custom headers
-- Less reliable
-
-## Recommended Implementation Plan
-
-Given your current setup, I recommend **Option A (Separate Vercel Project)**:
-
-### Step 1: Create the hosting structure
 ```bash
-mkdir scripts-hosting
-cd scripts-hosting
-mkdir public
-```
+sh public/install-chromium.sh
+``` 
 
-### Step 2: Set up the files
+### expacted result
+
 ```bash
-# Copy your script
-cp ../install-chromium.sh public/install.sh
 
-# Create package.json
-echo '{
-  "name": "rebrowse-scripts",
-  "version": "1.0.0",
-  "description": "Installation scripts for Rebrowse"
-}' > package.json
+
+-e ██████╗ ███████╗██████╗ ██████╗  ██████╗ ██╗    ██╗███████╗███████╗
+-e ██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔═══██╗██║    ██║██╔════╝██╔════╝
+-e ██████╔╝█████╗  ██████╔╝██████╔╝██║   ██║██║ █╗ ██║███████╗█████╗  
+-e ██╔══██╗██╔══╝  ██╔══██╗██╔══██╗██║   ██║██║███╗██║╚════██║██╔══╝  
+-e ██║  ██║███████╗██████╔╝██║  ██║╚██████╔╝╚███╔███╔╝███████║███████╗
+-e ╚═╝  ╚═╝╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝ ╚══════╝╚══════╝
+
+
+🚀 Chromium Setup
+========================================
+
+-e ℹ️  Detected OS: macos
+-e ℹ️  Installing macOS dependencies...
+-e ℹ️  Installing Python 3.11 (current version 3.9.6 is too old)...
+==> Downloading https://formulae.brew.sh/api/formula.jws.json
+==> Downloading https://formulae.brew.sh/api/cask.jws.json
+Warning: python@3.11 3.11.13 is already installed and up-to-date.
+To reinstall 3.11.13, run:
+  brew reinstall python@3.11
+-e ℹ️  Using Python 3.11 from Homebrew: /opt/homebrew/bin/python3.11
+-e ℹ️  Chromium already installed
+-e ✅ macOS dependencies installed
+-e ℹ️  Checking Python version using: /opt/homebrew/bin/python3.11
+-e ℹ️  Python version: 3.11.13
+-e ✅ Python version 3.11.13 meets requirements (>=3.11)
+-e ℹ️  Installing Python dependencies...
+-e ℹ️  Using Python: /opt/homebrew/bin/python3.11 (version: 3.11.13)
+Requirement already satisfied: pip in /opt/homebrew/lib/python3.11/site-packages (25.1.1)
+-e ℹ️  Installing browser-use and dependencies...
+-e ✅ Python dependencies installed
+-e ℹ️  Installing Playwright Chromium browser...
+-e ✅ Playwright Chromium browser installed
+-e ℹ️  Verifying installation...
+INFO     [browser_use.telemetry.service] Anonymized telemetry enabled. See https://docs.browser-use.com/development/telemetry for more information.
+INFO     [browser_use.BrowserSession🆂 c2c5.76] 🌎 Launching new local browser playwright:chromium keep_alive=False user_data_dir= ~/.config/browseruse/profiles/default
+INFO     [browser_use.BrowserSession🆂 c2c5.76]  ↳ Spawned browser_pid=56404 ~/Library/Caches/ms-playwright/chromium-1169/chrome-mac/Chromium.app/Contents/MacOS/Chromium
+INFO     [browser_use.BrowserSession🆂 c2c5.76] 🛑 Closing browser_pid=56404 browser context <BrowserContext browser=None>
+✅ Browser test successful! Page title: ''
+-e ✅ Installation verification passed!
+-e ℹ️  Creating usage example...
+-e ✅ Usage example created at ~/rebrowse_example.py
+-e ℹ️  Run it with: /opt/homebrew/bin/python3.11 ~/rebrowse_example.py
+
+-e ✅ 🎉 Installation completed successfully!
+
+-e ℹ️  🚀 Running example demonstration...
+This will show browser automation in action!
+
+👀 Watch for:
+  - 🌸 Pink bouncing REBROWSE screensaver with sparkles
+  - Browser window opening
+  - Navigation to rebrowse.me and httpbin.org
+  - Page titles being extracted
+
+💡 To skip this demo next time, use: SKIP_DEMO=1 curl ... | bash
+
+INFO     [browser_use.telemetry.service] Anonymized telemetry enabled. See https://docs.browser-use.com/development/telemetry for more information.
+=== Browser-Use Example Script ===
+This script demonstrates browser automation with browser-use library
+
+🚀 Starting browser automation example...
+ℹ️ rebrowse.png not found, using text logo
+🌸 Custom Rebrowse screensaver enabled! Logo: REBROWSE
+INFO     [browser_use.BrowserSession🆂 9eca.40] 🌎 Launching new local browser playwright:chromium keep_alive=False user_data_dir= ~/.config/browseruse/profiles/default
+INFO     [browser_use.BrowserSession🆂 9eca.40]  ↳ Spawned browser_pid=56427 ~/Library/Caches/ms-playwright/chromium-1169/chrome-mac/Chromium.app/Contents/MacOS/Chromium
+📍 Navigating to rebrowse.me...
+📄 Page title: Rebrowse - Loom for workflow automation
+🔗 Current URL: https://www.rebrowse.me/
+📍 Navigating to httpbin.org...
+📄 New page title: httpbin.org
+🔄 Closing browser...
+INFO     [browser_use.BrowserSession🆂 9eca.40] 🛑 Closing browser_pid=56427 browser context <BrowserContext browser=None>
+✅ Browser automation completed!
+
+-e ✅ ✨ Example demonstration completed successfully!
+🎯 Everything is working perfectly!
+
+🎉 Installation & Demo Complete!
+=================================
+
+What just happened:
+✅ Python 3.11+ installed and configured
+✅ browser-use package installed
+✅ Playwright Chromium browser installed
+✅ Example script created and tested
+
+Next steps:
+1. 🎯 You're all set!
+2. 🤖 For headless mode, set headless=True in the BrowserProfile
+3. 🗣️ Get support on Telegram: https://t.me/n0rixpunks
+
+Files created:
+- ~/rebrowse_example.py (your starting template)
+- ~/.rebrowse_install.log (installation log)
+
+Troubleshooting:
+- Re-run example: /opt/homebrew/bin/python3.11 ~/rebrowse_example.py
+- For headless issues: uncomment --disable-gpu in the script
+- Python path: /opt/homebrew/bin/python3.11
 ```
-
-### Step 3: Configure Vercel
-Create the `vercel.json` as shown above.
-
-### Step 4: Deploy
-```bash
-npx vercel --prod
-```
-
-### Step 5: Configure custom domain
-In Vercel dashboard, add your custom domain (e.g., `install.rebrowse.dev` or `scripts.yourdomain.com`)
-
-## Usage Examples
-
-After deployment, users can install with:
-```bash
-# Short URL
-curl -LsSf https://yourdomain.com/install | sh
-
-# Explicit script name
-curl -LsSf https://yourdomain.com/install.sh | sh
-
-# With error handling
-curl -LsSf https://yourdomain.com/install.sh | bash -s -- --help
-```
-
-## Security Considerations
-
-1. **HTTPS Only**: Ensure your domain uses HTTPS (Vercel provides this automatically)
-2. **Content-Type Headers**: Set proper headers to prevent browsers from executing scripts
-3. **Integrity**: Consider adding checksums for script verification
-4. **Rate Limiting**: Monitor usage to prevent abuse
-
-## Advanced: Script Versioning
-
-You could also support versioned scripts:
-```
-public/
-├── install.sh          # Latest version
-├── v1.0.0/
-│   └── install.sh
-└── v1.1.0/
-    └── install.sh
-```
-
-With redirects in `vercel.json`:
-```json
-{
-  "redirects": [
-    {
-      "source": "/install",
-      "destination": "/install.sh"
-    },
-    {
-      "source": "/latest",
-      "destination": "/install.sh"
-    }
-  ]
-}
-```
-
-## Next Steps
-
-1. Choose your preferred solution (I recommend Vercel Option A)
-2. Set up the hosting structure
-3. Deploy and test
-4. Configure your custom domain
-5. Update your documentation with the new installation command
-
-Would you like me to help you implement any of these solutions?
